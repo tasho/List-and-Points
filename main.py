@@ -1,7 +1,7 @@
 from pprint import pprint
 from student import Student
 
-actions = ['add', 'all', 'close']
+actions = ['new', 'add', 'all', 'close', 'check']
 
 if __name__ == "__main__":  # for windows
     students = []
@@ -24,12 +24,55 @@ if __name__ == "__main__":  # for windows
                 for student in students:
                     print(student)
 
+            if action == 'check':
+
+                name = str(input())
+
+                if not len(students):
+                    print('No matches.')
+                    continue
+
+                check = 0
+                for s in students:
+                    if s.name == name:
+                        check = 1
+
+                if check:
+                    print('Yep')
+                else:
+                    print('No')
+
+            if action == 'new':  # adding new student
+                name = input()
+                name = str(name)
+                points = 0
+
+                check = 0
+                for s in students:
+                    if s.name == name:
+                        check = 1
+
+                if not check:
+                    students.append(Student(name=name, points=points))
+                    print('Student', name, 'added.')
+                else:
+                    print('Student', name, 'is already exists.')
+
             if action == 'add':  # adding new student
                 name, points = input().split(' ')
                 name = str(name)
                 points = float(points)
-                students.append(Student(name=name, points=points))
-                print('Points for student ', name, ' added.')
+
+                check = 0
+                for s in students:
+                    if s.name == name:
+                        s.points += points
+                        check = 1
+
+                if check:
+                    print('Points for student', name, 'added.')
+                else:
+                    print('Student', name, 'does not exists.')
         except (Exception, e):
             print('[ERROR]', e)
             print('HELP:')
