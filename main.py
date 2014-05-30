@@ -24,7 +24,7 @@ if __name__ == "__main__":  # for windows
                 for student in students:
                     print(student)
 
-            if action == 'check':
+            if action == 'check': #cheking existance of student
 
                 name = str(input())
 
